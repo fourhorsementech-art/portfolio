@@ -302,7 +302,9 @@
           <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>End-to-end support</li>
         </ul>
       </div>
-      <form class="cta-form reveal" id="quoteForm">
+      <form class="cta-form reveal" id="quoteForm" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="931c8284-42c1-4cb1-8501-e20ec11cc050">
+        <input type="hidden" name="subject" value="New project brief — FourHorseMen Technologies website">
         <label for="q-name">Name</label>
         <input id="q-name" name="q-name" type="text" required placeholder="Your full name">
         <label for="q-email">Email</label>
