@@ -240,7 +240,9 @@
           </li>
         </ul>
       </div>
-      <form class="cta-form" id="contactForm">
+      <form class="cta-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="931c8284-42c1-4cb1-8501-e20ec11cc050">
+        <input type="hidden" name="subject" value="New enquiry — FourHorseMen Technologies website">
         <label for="name">Name</label>
         <input id="name" name="name" type="text" required placeholder="Your full name">
         <label for="org">Organisation</label>

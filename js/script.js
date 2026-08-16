@@ -65,34 +65,50 @@ window.addEventListener('scroll', () => {
 btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
 /* ── Contact form ── */
-document.getElementById('contactForm').addEventListener('submit', function (e) {
+document.getElementById('contactForm').addEventListener('submit', async function (e) {
   e.preventDefault();
   const name = document.getElementById('name').value || 'there';
-  showToast('Thanks, ' + name.split(' ')[0] + ' — we\'ll be in touch shortly!');
-  this.reset();
+  const btn = this.querySelector('button[type="submit"]');
+  btn.disabled = true;
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: new FormData(this),
+      headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      showToast('Thanks, ' + name.split(' ')[0] + ' — we\'ll be in touch shortly!');
+      this.reset();
+    } else {
+      showToast('Something went wrong. Please email us directly.');
+    }
+  } catch {
+    showToast('Network error. Please email us directly.');
+  }
+  btn.disabled = false;
 });
 
 /* ── Quote / project brief form ── */
-const COMPANY_EMAIL = 'fourhorsementech@gmail.com';
-document.getElementById('quoteForm').addEventListener('submit', function (e) {
+document.getElementById('quoteForm').addEventListener('submit', async function (e) {
   e.preventDefault();
-  const name    = document.getElementById('q-name').value;
-  const email   = document.getElementById('q-email').value;
-  const company = document.getElementById('q-company').value || 'N/A';
-  const type    = document.getElementById('q-type').value;
-  const summary = document.getElementById('q-summary').value;
-
-  const subject = `Project enquiry: ${type} — ${name}`;
-  const body =
-    `Name: ${name}\n` +
-    `Email: ${email}\n` +
-    `Company/organisation: ${company}\n` +
-    `Project type: ${type}\n\n` +
-    `Project summary & scope:\n${summary}`;
-
-  window.location.href = `mailto:${COMPANY_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  showToast('Opening your email app — if nothing opens, email us directly.');
-  this.reset();
+  const btn = this.querySelector('button[type="submit"]');
+  btn.disabled = true;
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: new FormData(this),
+      headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      showToast('Thanks — your project brief has been sent. We\'ll be in touch shortly!');
+      this.reset();
+    } else {
+      showToast('Something went wrong. Please email us directly.');
+    }
+  } catch {
+    showToast('Network error. Please email us directly.');
+  }
+  btn.disabled = false;
 });
 
 /* ── Particle canvas ── */
